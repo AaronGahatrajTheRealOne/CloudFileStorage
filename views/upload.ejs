@@ -1,17 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YOUR CLOUD</title>
+    <title>Upload - Your Cloud</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .upload-container {
+            background-color: #1e1e1e;
+            padding: 40px 60px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        
+        h1 {
+            margin-bottom: 30px;
+            color: #ffffff;
+            font-size: 2rem;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .fileUpload {
+            padding: 15px;
+            background-color: #2a2a2a;
+            border: 2px dashed #444;
+            border-radius: 8px;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+        
+        .fileUpload:hover {
+            border-color: #00d4ff;
+        }
+        
+        .fileUpload::file-selector-button {
+            background-color: #333;
+            color: #00d4ff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .fileUpload::file-selector-button:hover {
+            background-color: #444;
+        }
+        
+        .submit {
+            padding: 15px 30px;
+            background-color: #00d4ff;
+            color: #121212;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .submit:hover {
+            background-color: #00b8e6;
+            transform: translateY(-2px);
+        }
+        
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: #00d4ff;
+        }
+        
+        /* Show/Hide CSS */
+        .Success-message, .Fail-message {
+            display: none;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .Success-message {
+            background-color: #1b5e20;
+            color: #a5d6a7;
+        }
+        
+        .Fail-message {
+            background-color: #b71c1c;
+            color: #ffcdd2;
+        }
+        
+        .form-hidden {
+            display: none;
+        }
+    </style>
   </head>
   <body>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-      <input type="file" name="photoFromInput" class="fileUpload" />
-      <button type="submit" class="submit">Upload</button>
-    </form>
-    <script>
-       
-    </script>
+    <div class="upload-container">
+        <h1>Upload File</h1>
+        
+        <% if (success === 'true') { %>
+            <div class="Success-message">
+                <h2>Upload Successful!</h2>
+                <a href="/upload">Upload Another</a>
+            </div>
+        <% } else if (success === 'false') { %>
+            <div class="Fail-message">
+                <h2>Upload Failed!</h2>
+                <a href="/upload">Try Again</a>
+            </div>
+        <% } else { %>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="photoFromInput" class="fileUpload" required />
+                <button type="submit" class="submit">Upload</button>
+            </form>
+        <% } %>
+        
+        <a href="/" class="back-link">← Back to Home</a>
+    </div>
   </body>
 </html>
